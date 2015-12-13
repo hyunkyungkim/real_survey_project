@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .container
+    if post.id
+      h1.page-header 글수정
+    else
+      h1.page-header 글쓰기
+
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+      .form-group
+        label(for='title') Title
+        input.form-control(type='text', id='title', name='title', placeholder='title', value=post.title)
+      .form-group
+        label(for='category') Category
+        select.form-control(name='category')
+          option(value='설문',selected) 설문유형
+          option(value='학업') 학업
+          option(value='기업') 기업
+          option(value='기타') 기타
+      .form-group
+        label(for='gender') Gender
+        select.form-control(name='gender')
+          option(value='man') 남자 
+          option(value='man+woman', selected) 남녀공통
+          option(value='woman') 여자
+      .form-group
+        label(for='age') Age
+        select.form-control(name='age')
+          option(value='1', selected) 연령대
+          option(value='10대') 10대 
+          option(value='20대') 20대
+          option(value='30대') 30대
+          option(value='40대') 40대
+          option(value='50대외') 50대~
+      .form-group
+        label(for='content') Content
+        textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= post.content
+
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 완료
