@@ -14,6 +14,7 @@ var configAuth = require('./config/auth');
 var routes = require('./routes/index'),
     posts = require('./routes/posts'),
     users = require('./routes/users');
+    routeAuth = require('./routes/auth')
 var mongoose   = require('mongoose');
 
 var app = express();
@@ -66,7 +67,7 @@ configAuth(passport);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/posts', posts);
-//routeAuth(app, passport);
+routeAuth(app, passport);
 
 
 // catch 404 and forward to error handler
