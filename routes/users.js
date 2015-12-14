@@ -54,16 +54,7 @@ router.get('/new', function(req, res, next) {
   res.render('users/new', {messages: req.flash()});
 });
 
-router.get('/newadmin', function(req, res, next) {
-  User.findById({_id: req.params.id}, function(err, user) {
-    if( user.email === 'myrty1004@nate.com'){
-      res.render('users/new', {messages: req.flash()});
-    }else{
-      req.flash('denied', err);
-      return res.redirect('back');
-    }
-  });
-});
+
 
 router.get('/:id/edit', function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
