@@ -3,8 +3,7 @@ extends ../layout
 block content
   .container
     h1.page-header List
-    
-    | total #{pagination.numPosts} posts
+
     table.table.table-bordered
       thead
         tr
@@ -12,6 +11,9 @@ block content
           th 날짜
           th 조회수
           th 댓글
+          th 카테고리
+          th 성별
+          th 연령대
           th
       tbody
         each post in posts
@@ -21,6 +23,9 @@ block content
             td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td= post.read
             td= post.numComment
+            td= post.category
+            td= post.gender
+            td= post.age
             td
               a.btn.btn-xs.btn-default(href='/posts/#{post.id}/edit') 수정
               | 
@@ -30,20 +35,7 @@ block content
 
     //- 아래의 Pagination 부분은 만들 수 있다면 추가 점수 부여합니다. 
     //- 못하겠으면 빼도 좋아요.              
-    nav.center
-      ul.pagination
-        li(class=pagination.firstPage.cls): a(href=pagination.firstPage.url)
-          span(aria-hidden="true") &laquo;
-        li(class=pagination.prevPage.cls): a(href=pagination.prevPage.url)
-          span(aria-hidden="true") &lt;
-        each page in pagination.pages
-          li(class=page.cls)
-            a(href=page.url): span= page.text
-        li(class=pagination.nextPage.cls): a(href=pagination.nextPage.url)
-          span(aria-hidden="true") &gt;
-        li(class=pagination.lastPage.cls): a(href=pagination.lastPage.url)
-          span(aria-hidden="true") &raquo;
-
+    
     form#deleteForm(style='display:none', method="POST")
             
     script(type='text/javascript').

@@ -9,6 +9,23 @@ block content
       span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
       | 
       | (조회수 #{post.read})
+    p 
+      span Category : #{post.category} 
+      t
+      span Gender : #{post.gender}
+      t
+      span Age : #{post.age}
     p.well(style='white-space:pre;')= post.content
     
+  
+    form.form-inline(action='/posts/' + post._id + '/comments', method='POST')
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', placeholder='email')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', size=50, placeholder='content')
+      button.btn.btn-info 댓글저장
+    
+    hr  
     a.btn.btn-default(href='/posts') 목록
