@@ -67,6 +67,9 @@ router.post('/:id/comments', function(req, res, next) {
   var comment = new Comment({
     post: req.params.id,
     email: req.body.email,
+    category: req.body.category,
+    gender: req.body.gender,
+    age: req.body.age,
     content: req.body.content
   });
 
