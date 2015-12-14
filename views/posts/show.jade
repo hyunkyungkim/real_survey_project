@@ -17,7 +17,19 @@ block content
       span Age : #{post.age}
     p.well(style='white-space:pre;')= post.content
     
-  
+    hr
+    h3 Comment (#{post.numComment})
+    table.table
+      tr
+        th email
+        th content
+        th time
+      each comment in comments
+        tr
+          td= comment.email
+          td= comment.content
+          td= moment(comment.createdAt).format('YYYY/MM/DD')
+          
     form.form-inline(action='/posts/' + post._id + '/comments', method='POST')
       .form-group
         label.sr-only(for='email') email

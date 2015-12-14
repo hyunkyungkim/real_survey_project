@@ -44,7 +44,7 @@ function validateForm(form, options) {
 router.get('/', needAuth, function(req, res, next) {
   User.find({}, function(err, users) {
     if (err) {
-      return next(err);
+      return res.status(500).json({message: 'internal error', desc: err});
     }
     res.render('users/index', {users: users});
   });
@@ -59,7 +59,7 @@ router.get('/new', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
     if (err) {
-      return next(err);
+      return res.status(500).json({message: 'internal error', desc: err});
     }
     res.render('users/edit', {user: user});
   });
@@ -74,7 +74,7 @@ router.put('/:id', function(req, res, next) {
 
   User.findById({_id: req.params.id}, function(err, user) {
     if (err) {
-      return next(err);
+      return res.status(500).json({message: 'internal error', desc: err});
     }
     if (!user) {
       req.flash('danger', '존재하지 않는 사용자입니다.');
@@ -94,7 +94,7 @@ router.put('/:id', function(req, res, next) {
 
     user.save(function(err) {
       if (err) {
-        return next(err);
+        return res.status(500).json({message: 'internal error', desc: err});
       }
       req.flash('success', '사용자 정보가 변경되었습니다.');
       res.redirect('/users');
